@@ -7,7 +7,7 @@ const userSchema = new Schema({
         required: true
     },
     accountNumber: {
-        type: Integer,
+        type: Number,
         required: true
     },
     emailAddress: {
@@ -15,7 +15,7 @@ const userSchema = new Schema({
         required: true
     },
     identityNumber: {
-        type: Integer,
+        type: Number,
         required: true
     }
 });
