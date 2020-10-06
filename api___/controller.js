@@ -1,6 +1,8 @@
 const anggie = require('../services/anggie');
 const jwt = require('jsonwebtoken');
 const moment = require('moment');
+const redis = require('redis');
+const redisClient = redis.createClient(6379);
 
 const controllers = {
     auth: {
@@ -25,11 +27,21 @@ const controllers = {
                 });
             }
         },
-        getUsers: async (req, res, next) => {
-            const users = await anggie.getUsers();
-            res.status(200).json({
-                users: users
-            });
+        getUsers: async (req, res) => {
+            try {
+                const users = await anggie.getUsers();
+                
+                redisClient.setex('users', users, 3600);
+                
+                res.status(200).json({
+                    users: users
+                });
+            }catch(error){
+                res.status(500).json({
+                    error: error
+                });
+            }
+
         }
         // updateUser: (req, res) => {
         //     res.status(200).json({

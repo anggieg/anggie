@@ -1,5 +1,10 @@
 const controller = require('./controller');
-const checkToken = require('../middlewares/checkTokenMiddleware');
+const checkToken = require('../middlewares/checkToken');
+// const getFromCache = require('../middlewares/');
+// const cache = (req, res, next) => {
+//     console.log('in cache');
+//     next();
+// }
 
 module.exports = (app) => {
     app.route('/auth/getToken').get(controller.auth.getToken);

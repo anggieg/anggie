@@ -1,13 +1,25 @@
 require('dotenv').config();
 
 const express = require('express');
-const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/user');
 
 const app = express();
 
-const routes = require('./api/routes');
-routes(app);
+app.use(bodyParser.json());
+// route for auth API
+app.use('/auth', authRoutes);
+
+// route for user API
+app.use('/user', userRoutes);
+
+app.use((error, req, res, next) => {
+    res.status(error.statusCode).json({
+        error: error.message
+    });
+})
 
 const port = process.env.PORT || 3000;
 
