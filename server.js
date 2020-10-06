@@ -9,6 +9,7 @@ const userRoutes = require('./routes/user');
 const app = express();
 
 app.use(bodyParser.json());
+
 // route for auth API
 app.use('/auth', authRoutes);
 

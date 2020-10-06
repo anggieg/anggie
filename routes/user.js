@@ -1,15 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/user');
-const checkToken = require('../middlewares/checkToken')
+const authToken = require('../middlewares/authToken')
 
-router.get('/', checkToken, userController.getUsers);
-router.post('/', userController.postUser);
-router.patch('/:userId', userController.updateUser);
-router.delete('/:userId', userController.deleteUser);
-router.get('/getUserByAccNo/:accNo', userController.getUserByAccNo);
-router.get('/getUserByIdentityNo/:identityNo', userController.getUserByIdentityNo);
-
-router.get('/testRedis', userController.testRedis);
+router.get('/', authToken, userController.getUsers);
+router.post('/', authToken, userController.postUser);
+router.patch('/:userId', authToken, userController.updateUser);
+router.delete('/:userId', authToken, userController.deleteUser);
+router.get('/getUserByAccNo/:accNo', authToken, userController.getUserByAccNo);
+router.get('/getUserByIdentityNo/:identityNo', authToken, userController.getUserByIdentityNo);
 
 module.exports = router;

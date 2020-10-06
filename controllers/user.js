@@ -1,22 +1,6 @@
 const anggie = require('../services/anggie');
 const moment = require('moment');
 const redis = require('redis');
-const redisClient = redis.createClient();
-const flat = require('flat');
-
-exports.testRedis = (req, res, next) => {
-    // redisClient.lrange('mylist', 0, -1, (error, data) => {
-    //     data.map(d => {
-    //         console.log(JSON.parse(d));
-    //     });
-    // });
-
-    // redisClient.hmset('anggie', {'userName':'anggieGunawan', 'email':'anggie@email.com'});
-    // redisClient.hmset("myKey", "foo", "bar");
-    redisClient.hgetall('hera', (error, data) => {
-        res.status(200).json(data);
-    });
-}
 
 exports.getUsers = async (req, res, next) => {
     try {
@@ -116,35 +100,3 @@ exports.getUserByIdentityNo = async (req, res, next) => {
         next(error);
     }
 }
-
-
-
-// exports.postUser = async (req, res) => {
-//     try{
-//         const result = await anggie.postUser();
-//         res.status(200).json({
-//             user: result
-//         });
-//     }catch(error){
-//         res.status(500).json({
-//             error: error
-//         });
-//     }
-// }
-
-// exports.getUsers = async (req, res) => {
-//     try {
-//         const users = await anggie.getUsers();
-        
-//         redisClient.setex('users', users, 3600);
-        
-//         res.status(200).json({
-//             users: users
-//         });
-//     }catch(error){
-//         res.status(500).json({
-//             error: error
-//         });
-//     }
-
-// }

@@ -1,8 +1,8 @@
 const jwt = require('jsonwebtoken');
 
-const checkToken =  (req, res, next) => {
+const authToken =  (req, res, next) => {
 
-    const token = req.header('token');
+    const token = req.header('authToken');
     const secret = process.env.SECRET_KEY || 'anggiegunawan';
 
     jwt.verify(token, secret, (error, decoded) => {
@@ -15,4 +15,4 @@ const checkToken =  (req, res, next) => {
     });
 }
 
-module.exports = checkToken;
+module.exports = authToken;
