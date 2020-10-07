@@ -1,3 +1,4 @@
+// dotenv to read .env file configuration
 require('dotenv').config();
 
 const express = require('express');
@@ -10,10 +11,10 @@ const app = express();
 
 app.use(bodyParser.json());
 
-// route for auth API
+// route for authorization API
 app.use('/auth', authRoutes);
 
-// route for user API
+// route for user CRUD API
 app.use('/user', userRoutes);
 
 app.use((error, req, res, next) => {
@@ -22,17 +23,22 @@ app.use((error, req, res, next) => {
     });
 })
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 5678;
 
+// Connection string to connect to MongoDB Atlas cloud service
 mongoose.connect('mongodb+srv://anggieg:anggie2020@cluster0.pxqkt.mongodb.net/anggie?retryWrites=true&w=majority', {
     useNewUrlParser: true, 
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useCreateIndex:true,
+    useFindAndModify: false
 })
 .then(result => {
+    // if connection to MongoDB success, run server on a port
     app.listen(port, () => {
         console.log(`app listening on port : ${port}`);
     });
 })
 .catch(error => {
+    // if error , log the error
     console.log(error);
 });

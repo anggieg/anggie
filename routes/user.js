@@ -3,6 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/user');
 const authToken = require('../middlewares/authToken')
 
+// routes for user CRUD API
 router.get('/', authToken, userController.getUsers);
 router.post('/', authToken, userController.postUser);
 router.patch('/:userId', authToken, userController.updateUser);
