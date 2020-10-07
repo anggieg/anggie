@@ -28,6 +28,7 @@
             "emailAddress": <String email address>,
             "identityNumber": <Number identity number>,
         }
+    - Note : I made accountNumber as a unique Number type data generated in the backend
 
 4. Update a user : 
     - Method : PATCH
