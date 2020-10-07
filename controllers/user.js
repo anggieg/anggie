@@ -100,11 +100,16 @@ exports.updateUser = async (req, res, next) => {
 
 // get a user data by accountNumber
 exports.getUserByAccNo = async (req, res, next) => {
-
-    // get accountNumber from URL query parameters
-    const { accNo } = req.params;
-
+    
     try{
+        // get accountNumber from URL query parameters
+        const { accNo } = req.params;
+
+        if(isNaN(accNo)){
+            const error = new Error(`${accNo} is not a valid number`)
+            throw error;
+        }
+        
         // get the user data through the service
         const user = await anggie.getUserByAccNo(accNo);
         
@@ -124,9 +129,15 @@ exports.getUserByAccNo = async (req, res, next) => {
 exports.getUserByIdentityNo = async (req, res, next) => {
 
     // get identityNumber from URL query parameters
-    const { identityNo } = req.params;
-
+    
     try{
+        const { identityNo } = req.params;
+
+        if(isNaN(identityNo)){
+            const error = new Error(`${identityNo} is not a valid number`)
+            throw error;
+        }
+        
         // get the user data through the service
         const user = await anggie.getUserByIdentityNo(identityNo);
         

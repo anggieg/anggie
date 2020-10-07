@@ -173,7 +173,7 @@ const anggie = {
                         // if no user found return error response
                         if(!user){
                             const error = new Error(`Can not find user with accountNumber of ${accNo}`)
-                            throw error;
+                            reject(error);
                         }
 
                         // set a new user data in Redis with the user account number as key for future caching
@@ -215,7 +215,7 @@ const anggie = {
                         // if no user found return error response
                         if(!user){
                             const error = new Error(`Can not find user with identityNumber of ${identityNo}`)
-                            throw error;
+                            reject(error);
                         }
 
                          // set a new user data in Redis with the user identity number as key for future caching
